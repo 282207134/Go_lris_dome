@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  iris-app:
+    build: .
+    container_name: iris-sample
+    ports:
+      - "8080:8080"
+    environment:
+      - GIN_MODE=release
+      - SERVER_PORT=8080
+      - DB_DRIVER=sqlite
+      - DB_DATABASE=/app/data/iris_sample.db
+      - JWT_SECRET=your-secret-key-change-this-in-production
+      - JWT_EXPIRATION_TIME=86400
+      - LOG_LEVEL=info
+    volumes:
+      - ./data:/app/data
+      - ./uploads:/app/uploads
+      - ./logs:/app/logs
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8080/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # 可选：添加 Redis 缓存
+  redis:
+    image: redis:7-alpine
+    container_name: iris-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+
+  # 可选：添加数据库管理界面
+  adminer:
+    image: adminer:latest
+    container_name: iris-adminer
+    ports:
+      - "8081:8080"
+    environment:
+      - ADMINER_DEFAULT_SERVER=iris-db
+    restart: unless-stopped
+
+volumes:
+  redis_data:
+    driver: local

@@ -1,0 +1,82 @@
+{{define "content"}}
+<div class="text-center">
+    <h2>欢迎使用 Iris Go 框架！</h2>
+    <p class="mt-3">{{.message}}</p>
+    
+    <div class="mt-5">
+        <h3>快速开始</h3>
+        <p>这是一个完整的 Iris Go 框架学习项目，包含了各种常用功能和最佳实践。</p>
+    </div>
+    
+    <div class="mt-4">
+        <h3>功能特性</h3>
+        <div style="max-width: 600px; margin: 0 auto; text-align: left;">
+            <ul style="list-style: none; padding: 0;">
+                <li style="padding: 0.5rem 0;">✅ RESTful API 设计</li>
+                <li style="padding: 0.5rem 0;">✅ JWT 身份验证</li>
+                <li style="padding: 0.5rem 0;">✅ 数据库集成 (GORM + SQLite)</li>
+                <li style="padding: 0.5rem 0;">✅ 请求验证</li>
+                <li style="padding: 0.5rem 0;">✅ 错误处理</li>
+                <li style="padding: 0.5rem 0;">✅ 日志记录</li>
+                <li style="padding: 0.5rem 0;">✅ CORS 跨域支持</li>
+                <li style="padding: 0.5rem 0;">✅ 静态文件服务</li>
+                <li style="padding: 0.5rem 0;">✅ HTML 模板渲染</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="mt-5">
+        <h3>API 接口示例</h3>
+        <div class="code-block">
+            <pre># 简单问候
+GET /api/hello?name=世界
+
+# 获取数据
+GET /api/data/123
+
+# 用户登录
+POST /api/auth/login
+Content-Type: application/json
+{
+  "username": "admin",
+  "password": "admin123"
+}
+
+# 获取用户列表（需要认证）
+GET /api/users
+Authorization: Bearer &lt;token&gt;</pre>
+        </div>
+    </div>
+    
+    <div class="mt-4">
+        <a href="/api/docs" class="btn">查看 API 文档</a>
+        <a href="/pages/users" class="btn btn-secondary" style="margin-left: 1rem;">用户管理</a>
+    </div>
+    
+    <div class="mt-5">
+        <h3>项目结构</h3>
+        <div class="code-block" style="text-align: left;">
+            <pre>iris-cn-sample-project/
+├── main.go                 # 应用程序入口
+├── config/                 # 配置文件
+├── controllers/            # 控制器
+├── middleware/             # 中间件
+├── models/                 # 数据模型
+├── services/               # 服务层
+├── utils/                  # 工具函数
+├── static/                 # 静态文件
+├── templates/              # 模板文件
+└── database/               # 数据库相关</pre>
+        </div>
+    </div>
+    
+    <div class="mt-4">
+        <h3>学习资源</h3>
+        <div style="max-width: 500px; margin: 0 auto;">
+            <p><a href="https://iris-go.com/" target="_blank">📘 Iris 官方文档</a></p>
+            <p><a href="https://github.com/kataras/iris" target="_blank">📦 Iris GitHub 仓库</a></p>
+            <p><a href="https://github.com/kataras/iris/blob/main/README_ZH_HANS.md" target="_blank">📖 Iris 中文文档</a></p>
+        </div>
+    </div>
+</div>
+{{end}}
