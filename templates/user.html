@@ -1,0 +1,87 @@
+{{define "content"}}
+{{if .user}}
+<h2>用户详情</h2>
+
+<table class="table">
+    <tbody>
+        <tr>
+            <th style="width: 120px;">ID</th>
+            <td>{{.user.ID}}</td>
+        </tr>
+        <tr>
+            <th>用户名</th>
+            <td>{{.user.Username}}</td>
+        </tr>
+        <tr>
+            <th>邮箱</th>
+            <td>{{.user.Email}}</td>
+        </tr>
+        <tr>
+            <th>姓名</th>
+            <td>{{.user.FirstName}} {{.user.LastName}}</td>
+        </tr>
+        <tr>
+            <th>角色</th>
+            <td>
+                {{if eq .user.Role "admin"}}
+                    <span style="color: #dc3545; font-weight: bold;">管理员</span>
+                {{else}}
+                    <span style="color: #28a745;">普通用户</span>
+                {{end}}
+            </td>
+        </tr>
+        <tr>
+            <th>状态</th>
+            <td>
+                {{if eq .user.Status "active"}}
+                    <span style="color: #28a745; font-weight: bold;">激活</span>
+                {{else}}
+                    <span style="color: #6c757d;">禁用</span>
+                {{end}}
+            </td>
+        </tr>
+        <tr>
+            <th>头像</th>
+            <td>
+                {{if .user.Avatar}}
+                    <img src="{{.user.Avatar}}" alt="头像" style="width: 50px; height: 50px; border-radius: 50%;">
+                {{else}}
+                    <span style="color: #6c757d;">无头像</span>
+                {{end}}
+            </td>
+        </tr>
+        <tr>
+            <th>注册时间</th>
+            <td>{{.user.CreatedAt.Format "2006-01-02 15:04:05"}}</td>
+        </tr>
+        <tr>
+            <th>更新时间</th>
+            <td>{{.user.UpdatedAt.Format "2006-01-02 15:04:05"}}</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="mt-4">
+    <h3>JSON 数据</h3>
+    <div class="code-block">
+        <pre>{{printf "%+v" .user}}</pre>
+    </div>
+</div>
+
+{{else}}
+{{if .error}}
+<div class="alert alert-error">
+    {{.error}}
+</div>
+{{else}}
+<div class="alert alert-info">
+    用户不存在
+</div>
+{{end}}
+{{end}}
+
+<div class="mt-4 text-center">
+    <a href="/pages/users" class="btn btn-secondary">返回用户列表</a>
+    <a href="/" class="btn" style="margin-left: 1rem;">返回首页</a>
+</div>
+{{end}}
